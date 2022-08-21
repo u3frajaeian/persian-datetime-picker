@@ -790,7 +790,6 @@ class _MonthItemState extends State<_MonthItem> {
       itemStyle = textTheme.bodyText2
           ?.apply(color: colorScheme.onSurface.withOpacity(0.38));
       decoration = BoxDecoration(
-        border: Border.all(),
         shape: BoxShape.circle,
       );
     } else if (utils.isSameDay(widget.currentDate, dayToBuild)) {
