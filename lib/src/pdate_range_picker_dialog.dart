@@ -149,7 +149,7 @@ Future<JalaliRange?> showPersianDateRangePicker({
   assert(initialEntryMode != null);
   assert(useRootNavigator != null);
 
-  Widget dialog = DateRangePickerDialog(
+  Widget dialog = PersianDateRangePickerDialog(
     initialDateRange: initialDateRange,
     firstDate: firstDate,
     lastDate: lastDate,
@@ -195,8 +195,8 @@ Future<JalaliRange?> showPersianDateRangePicker({
   );
 }
 
-class DateRangePickerDialog extends StatefulWidget {
-  const DateRangePickerDialog({
+class PersianDateRangePickerDialog extends StatefulWidget {
+  const PersianDateRangePickerDialog({
     Key? key,
     this.initialDateRange,
     required this.firstDate,
@@ -236,10 +236,10 @@ class DateRangePickerDialog extends StatefulWidget {
   final String? fieldEndLabelText;
 
   @override
-  _DateRangePickerDialogState createState() => _DateRangePickerDialogState();
+  _PersianDateRangePickerDialogState createState() => _PersianDateRangePickerDialogState();
 }
 
-class _DateRangePickerDialogState extends State<DateRangePickerDialog> {
+class _PersianDateRangePickerDialogState extends State<PersianDateRangePickerDialog> {
   PDatePickerEntryMode? _entryMode;
   Jalali? _selectedStart;
   Jalali? _selectedEnd;
