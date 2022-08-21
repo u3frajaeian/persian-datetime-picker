@@ -310,6 +310,12 @@ extension JalaliExt on Jalali {
     return '${f.yyyy}/${f.mm}';
   }
 
+  String formatHeader() {
+    final f = formatter;
+    final m = JalaliDate.months[month - 1];
+    return '$m ${f.yyyy}';
+  }
+
   String formatShortMonthDay() {
     final f = formatter;
     return '${f.dd} ${f.mN}';

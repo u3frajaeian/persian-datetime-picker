@@ -429,7 +429,7 @@ class _DayHeaders extends StatelessWidget {
     final List<Widget> result = <Widget>[];
     int firstDayOfWeekIndex = 0;
     for (int i = firstDayOfWeekIndex; true; i = (i + 1) % 7) {
-      final String weekday = narrowWeekdays[i];
+      final String weekday = utils.shortDayName[i];
       result.add(ExcludeSemantics(
         child: Center(child: Text(weekday, style: headerStyle)),
       ));
@@ -753,7 +753,7 @@ class _MonthItemState extends State<_MonthItem> {
         dayToBuild.isAfter(widget.selectedDateStart!) &&
         dayToBuild.isBefore(widget.selectedDateEnd!);
 
-    _HighlightPainter? highlightPainter;
+    // _HighlightPainter? highlightPainter;
 
     if (isSelectedDayStart || isSelectedDayEnd) {
       // The selected start and end dates gets a circle background
@@ -769,22 +769,30 @@ class _MonthItemState extends State<_MonthItem> {
         final _HighlightPainterStyle style = isSelectedDayStart
             ? _HighlightPainterStyle.highlightTrailing
             : _HighlightPainterStyle.highlightLeading;
-        highlightPainter = _HighlightPainter(
-          color: highlightColor,
-          style: style,
-          textDirection: textDirection,
-        );
+        // highlightPainter = _HighlightPainter(
+        //   color: highlightColor,
+        //   style: style,
+        //   textDirection: textDirection,
+        // );
+
       }
     } else if (isInRange) {
       // The days within the range get a light background highlight.
-      highlightPainter = _HighlightPainter(
-        color: highlightColor,
-        style: _HighlightPainterStyle.highlightAll,
-        textDirection: textDirection,
-      );
+      // highlightPainter = _HighlightPainter(
+      //   color: highlightColor,
+      //   style: _HighlightPainterStyle.highlightAll,
+      //   textDirection: textDirection,
+      // );
+      decoration = BoxDecoration(
+          shape: BoxShape.circle, color: colorScheme.primary.withOpacity(0.1));
     } else if (isDisabled) {
+      print("disabled");
       itemStyle = textTheme.bodyText2
           ?.apply(color: colorScheme.onSurface.withOpacity(0.38));
+      decoration = BoxDecoration(
+        border: Border.all(),
+        shape: BoxShape.circle,
+      );
     } else if (utils.isSameDay(widget.currentDate, dayToBuild)) {
       // The current day gets a different text color and a circle stroke
       // border.
@@ -794,6 +802,10 @@ class _MonthItemState extends State<_MonthItem> {
         shape: BoxShape.circle,
       );
     }
+
+    
+      print(decoration?.border);
+    
 
     // We want the day of month to be spoken first irrespective of the
     // locale-specific preferences or TextDirection. This is because
@@ -824,21 +836,28 @@ class _MonthItemState extends State<_MonthItem> {
       ),
     );
 
-    if (highlightPainter != null) {
-      dayWidget = CustomPaint(
-        painter: highlightPainter,
-        child: dayWidget,
-      );
-    }
+    // if (highlightPainter != null) {
+    //   dayWidget = CustomPaint(
+    //     painter: highlightPainter,
+    //     child: dayWidget,
+    //   );
+    // }
 
     if (!isDisabled) {
-      dayWidget = InkResponse(
-        focusNode: _dayFocusNodes[day - 1],
-        onTap: () => widget.onChanged(dayToBuild),
-        radius: _monthItemRowHeight / 2 + 4,
-        splashColor: colorScheme.primary.withOpacity(0.38),
-        onFocusChange: _dayFocusChanged,
-        child: dayWidget,
+      dayWidget = Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 0.5, color: colorScheme.onPrimary.withOpacity(0.2)),
+          shape: BoxShape.circle,
+
+        ),
+        child: InkResponse(
+          focusNode: _dayFocusNodes[day - 1],
+          onTap: () => widget.onChanged(dayToBuild),
+          radius: _monthItemRowHeight / 2 + 4,
+          splashColor: colorScheme.primary.withOpacity(0.38),
+          onFocusChange: _dayFocusChanged,
+          child: dayWidget,
+        ),
       );
     }
 
@@ -933,10 +952,12 @@ class _MonthItemState extends State<_MonthItem> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           alignment: AlignmentDirectional.centerStart,
           child: ExcludeSemantics(
-            child: Text(
-              widget.displayedMonth.formatMonthYear(),
-              style: textTheme.bodyText2!
-                  .apply(color: themeData.colorScheme.onSurface),
+            child: Center(
+              child: Text(
+                widget.displayedMonth.formatHeader(),
+                style: textTheme.bodyText2!
+                    .apply(color: themeData.colorScheme.onSurface),
+              ),
             ),
           ),
         ),
