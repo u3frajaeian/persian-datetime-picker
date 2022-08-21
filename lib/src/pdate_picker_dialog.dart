@@ -110,7 +110,7 @@ Future<Jalali?> showPersianDatePicker({
       'Provided initialDate $initialDate must satisfy provided selectableDayPredicate.');
   assert(debugCheckHasMaterialLocalizations(context));
 
-  Widget dialog = _DatePickerDialog(
+  Widget dialog = DatePickerDialog(
     initialDate: initialDate,
     firstDate: firstDate,
     lastDate: lastDate,
@@ -151,8 +151,8 @@ Future<Jalali?> showPersianDatePicker({
   );
 }
 
-class _DatePickerDialog extends StatefulWidget {
-  _DatePickerDialog({
+class DatePickerDialog extends StatefulWidget {
+  DatePickerDialog({
     Key? key,
     required Jalali initialDate,
     required Jalali firstDate,
@@ -223,7 +223,7 @@ class _DatePickerDialog extends StatefulWidget {
   _DatePickerDialogState createState() => _DatePickerDialogState();
 }
 
-class _DatePickerDialogState extends State<_DatePickerDialog> {
+class _DatePickerDialogState extends State<DatePickerDialog> {
   PDatePickerEntryMode? _entryMode;
   Jalali? _selectedDate;
   late bool _autoValidate;
