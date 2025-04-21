@@ -425,7 +425,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> {
     );
 
     final Size dialogSize = _dialogSize(context)! * textScaleFactor;
-    final DialogTheme dialogTheme = Theme.of(context).dialogTheme;
+    final DialogThemeData dialogTheme = DialogTheme.of(context);
     return Dialog(
       insetPadding:
           const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),

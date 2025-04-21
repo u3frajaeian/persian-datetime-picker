@@ -80,7 +80,7 @@ class JalaliRange {
   }
 
   @override
-  int get hashCode => hashValues(start, end);
+  // int get hashCode => hashValues(start, end);
 
   @override
   String toString() => '$start - $end';

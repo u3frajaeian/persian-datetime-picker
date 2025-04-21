@@ -391,7 +391,7 @@ class _PersianDateRangePickerDialogState extends State<PersianDateRangePickerDia
           cancelText: widget.cancelText ?? 'لغو',
           helpText: widget.helpText ?? 'انتخاب تاریخ',
         );
-        final DialogTheme dialogTheme = Theme.of(context).dialogTheme;
+        final DialogThemeData dialogTheme = DialogTheme.of(context);
         size = orientation == Orientation.portrait
             ? _inputPortraitDialogSize
             : _inputLandscapeDialogSize;
